@@ -44,12 +44,15 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Spring Boot Starter for Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+
+
+		<!-- Spring Boot Starter for Testing -->
+
 	</dependencies>
 
 	<build>

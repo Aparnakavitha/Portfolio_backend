@@ -1,7 +1,5 @@
 package com.example.backend_.Controller;
 
-
-
 import com.example.backend_.entity.EducationEntity;
 import com.example.backend_.Service.EducationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +51,19 @@ public class EducationController {
     public ResponseEntity<EducationEntity> getEducation(@PathVariable UUID id) {
         EducationEntity education = educationService.getEducationById(id);
         return education != null ? ResponseEntity.ok(education) : ResponseEntity.notFound().build();
+    }
+
+    // Update education record by ID
+    @PutMapping("/{id}")
+    public ResponseEntity<EducationEntity> updateEducation(@PathVariable UUID id,
+                                                           @RequestParam("name") String name,
+                                                           @RequestParam(value = "image", required = false) MultipartFile image) {
+        try {
+            EducationEntity updatedEducation = educationService.updateEducation(id, name, image);
+            return updatedEducation != null ? ResponseEntity.ok(updatedEducation) : ResponseEntity.notFound().build();
+        } catch (IOException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Delete education record by ID
