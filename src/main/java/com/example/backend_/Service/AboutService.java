@@ -34,6 +34,14 @@ public class AboutService {
         about.setImage(file.getBytes());
         return aboutRepository.save(about);
     }
+    public About addAbout(String name, String description, MultipartFile image) throws IOException {
+        About about = new About();
+        about.setName(name);
+        about.setDescription(description);
+        about.setImage(image.getBytes());  // Convert image to byte array
+        return aboutRepository.save(about);
+    }
+
 
     public About updateAbout(UUID id, String name, String description, MultipartFile file) throws IOException {
         Optional<About> optionalAbout = aboutRepository.findById(id);

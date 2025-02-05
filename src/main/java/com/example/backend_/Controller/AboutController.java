@@ -33,11 +33,15 @@ public class AboutController {
     }
 
     @PostMapping
-    public ResponseEntity<About> saveAbout(@RequestParam("name") String name,
-                                           @RequestParam("description") String description,
-                                           @RequestParam("image") MultipartFile file) throws IOException {
-        About savedAbout = aboutService.saveAbout(name, description, file);
-        return ResponseEntity.ok(savedAbout);
+    public ResponseEntity<About> addAbout(@RequestParam("name") String name,
+                                          @RequestParam("description") String description,
+                                          @RequestParam("image") MultipartFile image) {
+        try {
+            About newAbout = aboutService.addAbout(name, description, image);
+            return ResponseEntity.ok(newAbout);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PutMapping("/{id}")
